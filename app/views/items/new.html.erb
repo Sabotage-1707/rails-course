@@ -6,6 +6,14 @@
     <%=label_tag :price %>
     <%=text_field_tag  :price %>
 
+    <%=label_tag :seller_id %>
+    <%=select_tag :seller_id, options_from_collection_for_select(@sellers, :id, :name, "1")%>
+    </br>
+    </br>
+    <%=label_tag :description %>
+    <%=text_field_tag  :description %>
+
     <%=submit_tag "Submit"%>
 <% end %>
+<%= render "shared/email"%>
 

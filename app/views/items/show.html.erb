@@ -1,9 +1,15 @@
 <h1><%= link_to "HOME", items_path%></h1>
-<h2>item</h2>
 
-<h1 style = "red"><%= @item.name %></h1>
+<h1 style="color: #B00100"><%= @item.name %></h1>
 <p><%= @item.price %></p>
-<p><%= @item.description %></p>
+<p><%=links_to_content(@item.description,800, 400)%></p>
+<p><%= @item.votes %>,   <%= link_to "+", upvote_item_path  %></p>
+<p><%= @seller.name %></p>
 <p><%= @item.created_at %></p>
-<p><%= link_to "Edit", edit_item_path%></p>
+
+<p><%= @item.created_at %></p>
+
+<p><%= button_to "Edit", edit_item_path , method: :get%></p>
+
+<%= render "shared/email"%>
 

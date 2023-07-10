@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  #root "items#index"
-resources :items
+resources :items do
+  get "upvote" , on: :member
+  get "expensive", on: :collection
+end
 
+root "items#index"
+get "/admin", to: "admin#users_count"
 
 end
