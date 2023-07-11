@@ -4,12 +4,21 @@
         <li><%= link_to item.name, item_path(item)%> </li>
         <li><%=item.price%></li>
         <li><%=item.votes%>,  <%= link_to "+" , upvote_item_path(item)%></li>
-        <li><%=links_to_content(item.description, 100, 100)%></li>
-        <li><%=button_to "delete",  item_path(item ), method: :delete%></li>
+        <li>
+            <%if !item.description.nil? && links_to_content(item.description, 100, 100).start_with?("<a")%>
+                <%= "link to img" %>
+            <%elsif  !item.description.nil? && links_to_content(item.description, 100, 100).start_with?("<img")%>
+                <%= "img" %>
+            <%else%>
+                <%=item.description%>
+            <%end%>
+        </li>
+        <li><%=button_to "delete",  item_path(item ), method: :delete,  class:"btn-primary"%></li>
         <br>
     <%end%>
-    <%= button_to "create new item" , new_item_path, method: :get%>
-    <%= button_to "only expensive  " , expensive_items_path, method: :get%>
+    <%= button_to "create new item" , new_item_path, method: :get, class:"btn-primary"%>
+    <%= button_to "only expensive" , expensive_items_path, method: :get,  class:"btn-primary"%>
+    <%= button_to "admin" , admin_path, method: :get,  class:"btn-primary"%>
 </ul>
-<%= render "shared/email"%>
+<%= render partial:"shared/email"%>
 

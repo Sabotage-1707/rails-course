@@ -7,10 +7,13 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <h1>User panel</h1>
+    <p style="color:#b00100"><%=flash[:error]%></p>
+    <p style="color:#008000"><%=flash[:success]%></p>
     <%= yield %>
   </body>
 </html>

@@ -4,25 +4,31 @@ class ItemsController < ApplicationController
   before_action :find_seller_of_item , only: %i[show edit update]
 
   def index
-    @items = Item.all.order('id')
+    @items = Item.all.sort
+    @items = Item.where("price >= ?",params[:price_from] ) if params[:price_from]
+    @items = @items.where("votes" =>  [2..5]) if params[:votes]
+
   end
 
   def create
+
     item = Item.create(items_params)
     if item.persisted?
+      flash[:success]='Item was successful created'
       redirect_to items_path
     else
-      render json: item.errors, status: :unprocessable_entity
+      flash[:error] = 'Please fill all fields correctly'
+      redirect_to new_item_path
     end
   end
 
   def show
 
-    #render body:'Page not found', status: 404  unless @item
   end
 
   def new;
     @sellers = Seller.all
+    @item = Item.new
   end
 
   def upvote
@@ -31,40 +37,46 @@ class ItemsController < ApplicationController
   end
 
   def expensive
-    @items = Item.where('price > 50')
+    @items = Item.where('price > 12000')
     render :index
   end
 
   def destroy
     if @item.destroy.destroyed?
+      flash[:success]='Item was successful deleted'
       redirect_to items_path
     else
-      render json: @item.errors, status: :unprocessable_entity
+      flash.now[:error] = "Item wasn't  deleted"
+      redirect_to items_path
     end
   end
 
   def edit
     @sellers = Seller.all
-    #render body:'Page not found', status: 404  unless @item
+
   end
 
   def update
     if @item.update(items_params)
+      flash[:success]='Item was successful updated'
       redirect_to item_path
     else
-      render json: @item.errors, status: :unprocessable_entity
+      flash.now[:error]="Item wasn't updated"
+      render json: item.errors, status: :unprocessable_entity
     end
   end
+
   private
-  #items_params.permit(:name, :description, :price, :real, :weight)
+
   def items_params
-    params.permit(:name, :price, :seller_id, :description)
+    params.require(:item).permit(:name, :price, :description, :seller_id)
   end
+
   def find_seller_of_item
     @seller = Seller.where("id = #{@item.seller_id}").first
   end
-  def find_item
 
+  def find_item
     @item = Item.where(id: params[:id]).first
     render_404 unless @item
   end

@@ -1,18 +1,14 @@
 <h1>edit <%=@item.name%> </h1>
-<%= form_tag item_path(@item) , method: :put do %>
-    <%=label_tag  :name%>
-    <%=text_field_tag  :name, @item.name %>
-
-    <%=label_tag :price %>
-    <%=text_field_tag  :price, @item.price %>
-
-    <%=label_tag :seller_id %>
-    <%=select_tag :seller_id, options_from_collection_for_select(@sellers, :id, :name)%>
+<%= simple_form_for @item do |f|%>
+        <%=f.input  :name, label: t("applicationrecord.attributes.item.name"), input_html: { class: "form-text"} , placeholder: @item.name%>
+        <%=f.input  :price, label: t("applicationrecord.attributes.item.price"), placeholder: @item.price , required: true%>
+        <%=f.input  :seller_id, collection: @sellers , label: t("applicationrecord.attributes.item.seller"), placeholder: @item.seller_id , required: true%>
+        <%=f.input  :description,label: t("item.description"), input_html: { class: "form-text"} , placeholder: @item.description%>
     </br>
     </br>
-    <%=label_tag :description %>
-    <%=text_field_tag  :description, @item.description %>
-    
-    <%=submit_tag "Submit"%>
+
+     <%=f.button :submit, "#{t("cotrollers.update")} #{t("applicationrecord.models.item")}",  class:"btn-primary"%>
 <% end %>
-<%= render "shared/email"%>
+<%= render partial: "shared/email"%>
+
+

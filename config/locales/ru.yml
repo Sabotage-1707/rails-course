@@ -28,17 +28,16 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
-
-en:
+ru:
   cotrollers:
-    update: "Update"
+    update: "Обновить"
   item:
-    description: "Description"
+    description: "Описание"
   applicationrecord:
     models:
-      item: "Item"
+      item: "Товар"
     attributes:
       item:
-        price: "Price"
-        name: "Name"
-        seller: "Seller"
+        price: "Цена"
+        name: "Название"
+        seller: "Продовец"

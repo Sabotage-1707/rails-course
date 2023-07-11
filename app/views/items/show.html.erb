@@ -9,7 +9,7 @@
 
 <p><%= @item.created_at %></p>
 
-<p><%= button_to "Edit", edit_item_path , method: :get%></p>
+<p><%= button_to "Edit", edit_item_path , method: :get,  class:"btn-primary"%></p>
 
-<%= render "shared/email"%>
+<%= render partial: "shared/email"%>
 
