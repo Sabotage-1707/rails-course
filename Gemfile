@@ -28,8 +28,9 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem 'bootstrap', '~> 5.1.3'
-
+gem 'devise'
 gem 'simple_form'
+gem 'faker', git:'https://github.com/faker-ruby/faker.git', branch:"main"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -57,6 +58,8 @@ group :development, :test do
   gem "rspec-rails"
   gem "pry"
   gem "cssbundling-rails"
+  gem "factory_bot"
+  gem "rails-controller-testing"
 end
 
 group :development do
@@ -70,5 +73,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-
+  gem "shoulda-matchers"
 end

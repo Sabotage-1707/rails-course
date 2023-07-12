@@ -11,9 +11,14 @@
   </head>
 
   <body>
-    <h1>User panel</h1>
-    <p style="color:#b00100"><%=flash[:error]%></p>
-    <p style="color:#008000"><%=flash[:success]%></p>
-    <%= yield %>
+    <%= render "include/auth/header"%>
+    <div class="jumbotron vertical-center">
+      <div class="container">
+        <h1>User panel</h1>
+
+        <%= render "include/main/notification"%>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

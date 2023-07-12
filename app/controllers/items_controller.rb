@@ -7,7 +7,6 @@ class ItemsController < ApplicationController
     @items = Item.all.sort
     @items = Item.where("price >= ?",params[:price_from] ) if params[:price_from]
     @items = @items.where("votes" =>  [2..5]) if params[:votes]
-
   end
 
   def create
@@ -53,7 +52,6 @@ class ItemsController < ApplicationController
 
   def edit
     @sellers = Seller.all
-
   end
 
   def update

@@ -4,7 +4,9 @@ class Item < ApplicationRecord
 
 
   belongs_to :seller
-  belongs_to :order, optional: true
+  
+  has_many :items_orders
+  has_many :orders, through: :items_orders
 
   has_many :carts_items
   has_many :carts, through: :carts_items
